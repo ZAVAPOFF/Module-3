@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:Notification"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="TBStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Goudy Stout"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
@@ -14,6 +21,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="*"/>
@@ -21,6 +29,33 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1" Grid.Row="3">
+            <Button x:Name="btnMessage" Height="52"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Stretch"
+                    Content="Сообщения"
+                    Style="{DynamicResource TBStyle}" 
+                    Click="Notify_Message"/>
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="3">
+            <Button x:Name="btnCall" Height="52"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Stretch"
+                    Content="Звонки" 
+                    Style="{DynamicResource TBStyle}" 
+                    Click="Notify_Call"/>
+        </Grid>
+
+        <Grid Grid.Column="3" Grid.Row="3">
+            <Button x:Name="btnEmail" Height="52"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Stretch"
+                    Content="Электронные письма"
+                    Style="{DynamicResource TBStyle}" 
+                    Click="Notify_Email"/>
+        </Grid>
     </Grid>
-    
+
 </Window>
