@@ -1,56 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Task
 {
     public partial class MainWindow : Window
     {
-        private List<Action<string>> _delegates;
+        private List<TaskModel> tasks = new List<TaskModel>();
 
         public MainWindow()
         {
             InitializeComponent();
-            _delegates = new List<Action<string>> { SendNotification, LogTask };
         }
 
-        private void AddTask_Click(object sender, RoutedEventArgs e)
+        private void AddTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            string task = TaskInput.Text;
-            if (!string.IsNullOrEmpty(task))
+            string taskName = TaskNameTextBox.Text;
+            if (string.IsNullOrWhiteSpace(taskName))
             {
-                TaskList.Items.Add(task);
-                TaskInput.Clear();
+                MessageBox.Show("Введите имя задачи.");
+                return;
+            }
 
-                // Выберите делегата для выполнения задачи
-                foreach (var del in _delegates)
+            Action<string> selectedDelegate = null;
+
+            if (DelegateComboBox.SelectedItem is ComboBoxItem selectedItem)
+            {
+                switch (selectedItem.Content.ToString())
                 {
-                    del(task);
+                    case "Уведомление":
+                        selectedDelegate = Notify;
+                        break;
+                    case "Запись в журнал":
+                        selectedDelegate = LogToFile;
+                        break;
                 }
             }
+
+            TaskModel task = new TaskModel(taskName, selectedDelegate);
+            tasks.Add(task);
+            TaskListBox.Items.Add(taskName);
+            TaskNameTextBox.Clear();
         }
 
-        private void SendNotification(string task)
+        private void Notify(string taskName)
         {
-            MessageBox.Show($"Уведомление: Задача '{task}' добавлена.");
+            MessageBox.Show($"Уведомление: задача '{taskName}' выполнена!");
         }
 
-        private void LogTask(string task)
+        private void LogToFile(string taskName)
         {
-            // Здесь можно добавить код для записи задачи в журнал
-            Console.WriteLine($"Задача '{task}' записана в журнал.");
+            // Здесь можно добавить код для записи в файл
+            MessageBox.Show($"Запись в журнал: задача '{taskName}' выполнена!");
         }
     }
 }
-

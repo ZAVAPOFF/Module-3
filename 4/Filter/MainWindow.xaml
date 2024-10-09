@@ -1,0 +1,22 @@
+﻿<Window x:Class="Filter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Filter" Height="350" Width="525">
+    <Grid>
+        <StackPanel>
+            <!-- Фильтр по дате -->
+            <Label Content="Фильтр по дате:"/>
+            <DatePicker x:Name="DatePicker"/>
+
+            <!-- Фильтр по ключевому слову -->
+            <Label Content="Фильтр по ключевому слову:" Height="28"/>
+            <TextBox x:Name="KeywordTextBox"/>
+
+            <!-- Кнопка фильтрации -->
+            <Button Content="Применить фильтр" Click="ApplyFilter_Click"/>
+
+            <!-- Список данных -->
+            <ListBox x:Name="DataListBox" DisplayMemberPath="Description"/>
+        </StackPanel>
+    </Grid>
+</Window>
