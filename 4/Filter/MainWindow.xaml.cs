@@ -26,11 +26,11 @@ namespace Filter
             // Пример данных
             _dataItems = new List<DataItem>
             {
-                new DataItem(DateTime.Now, "Meeting with team"),
-                new DataItem(DateTime.Now.AddDays(-1), "Complete project report"),
-                new DataItem(DateTime.Now.AddDays(2), "Plan vacation"),
-                new DataItem(DateTime.Now.AddDays(-5), "Workshop on development"),
-                new DataItem(DateTime.Now.AddDays(1), "Doctor appointment")
+                new DataItem(DateTime.Now, "Встреча с друзьями"),
+                new DataItem(DateTime.Now.AddDays(-1), "Поход к врачу"),
+                new DataItem(DateTime.Now.AddDays(2), "Завершение проекта"),
+                new DataItem(DateTime.Now.AddDays(-5), "Просмотр сериала"),
+                new DataItem(DateTime.Now.AddDays(1), "Просмотр фильма")
             };
 
             DataListBox.ItemsSource = _dataItems;
@@ -53,8 +53,7 @@ namespace Filter
             // Применение фильтра по ключевому слову
             if (!string.IsNullOrEmpty(keyword))
             {
-                string lowerKeyword = keyword.ToLower();
-                filteredItems = filteredItems.Where(item => DataFilters.FilterByKeyword(item, lowerKeyword));
+                filteredItems = filteredItems.Where(item => DataFilters.FilterByKeyword(item, keyword));
             }
 
             DataListBox.ItemsSource = filteredItems.ToList();

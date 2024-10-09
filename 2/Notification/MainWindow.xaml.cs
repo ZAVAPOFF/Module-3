@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Notification
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
 
     public partial class MainWindow : Window
     {
